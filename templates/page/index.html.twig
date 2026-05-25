@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Accueil - Ecomerce Khadiri{% endblock %}
+
+{% block content %}
+    <section class="course-hero p-5 mb-4 rounded-3">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <span class="badge badge-soft mb-3">Selection premium</span>
+                <h1 class="display-5 fw-bold">Ecomerce Khadiri, votre boutique de cours</h1>
+                <p class="fs-5">Achetez des formations, organisez vos supports et suivez un parcours e-commerce complet sous Symfony.</p>
+                <a href="{{ path('app_catalog_all') }}" class="btn btn-primary btn-lg">Decouvrir les formations</a>
+            </div>
+            <div class="col-lg-5 mt-4 mt-lg-0">
+                <img class="hero-course-image rounded" src="{{ asset('images/courses/marketing.png') }}" alt="Ecomerce Khadiri">
+            </div>
+        </div>
+    </section>
+
+    <div class="khadiri-grid">
+        {% for slug, course in courses %}
+            <div>
+                <div class="card khadiri-card h-100">
+                    <img class="course-card-image rounded-top" src="{{ asset(course.imagePath) }}" alt="{{ course.name }}">
+                    <div class="card-body">
+                        <span class="badge badge-soft mb-2">{{ course.category.name }}</span>
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <p class="text-muted">{{ course.category.name }} - {{ course.author.name }}</p>
+                        <p>{{ course.synopsis }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong>{{ course.price|number_format(2, ',', ' ') }} DH</strong>
+                            <a href="{{ path('app_catalog_view', {slug: slug}) }}" class="btn btn-outline-primary btn-sm">Consulter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

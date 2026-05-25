@@ -1,0 +1,8 @@
+{{ form_start(form, {action: path('app_subscribe')}) }}
+    <h5>Lettre Khadiri</h5>
+    <div class="d-flex gap-2">
+        {{ form_widget(form.email, {attr: {class: 'form-control', placeholder: 'Email address'}}) }}
+        <button class="btn btn-primary" type="submit">S'inscrire</button>
+    </div>
+    {{ form_errors(form) }}
+{{ form_end(form) }}

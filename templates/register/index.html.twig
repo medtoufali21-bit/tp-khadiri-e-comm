@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="h3 mb-4">Creer votre espace client</h1>
+                    {{ form_start(registerForm) }}
+                    {{ form_row(registerForm.fullName, {label: 'Nom complet'}) }}
+                    {{ form_row(registerForm.email, {label: 'Email'}) }}
+                    {{ form_row(registerForm.phone, {label: 'Telephone'}) }}
+                    {{ form_row(registerForm.password) }}
+                    <button class="btn btn-primary" type="submit">Creer le compte</button>
+                    {{ form_end(registerForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Catalogue{% endblock %}
+
+{% block content %}
+    {{ include('partials/_jumbotron.html.twig') }}
+
+    <div class="khadiri-grid">
+        {% for slug, course in courses %}
+            <div>
+                <div class="card khadiri-card h-100">
+                    <img class="course-card-image rounded-top" src="{{ asset(course.imagePath) }}" alt="{{ course.name }}">
+                    <div class="card-body">
+                        <span class="badge badge-soft mb-2">{{ course.category.name }}</span>
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ course.category.name }} - par {{ course.author.name }}</h6>
+                        <p class="card-text">{{ course.synopsis }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">{{ course.price|number_format(2, ',', ' ') }} DH</span>
+                            <a href="{{ path('app_catalog_view', {slug: slug}) }}" class="btn btn-outline-primary btn-sm">Voir la fiche</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="list-group">
+    {% for slug, course in courses %}
+        <a href="{{ path('app_catalog_view', {slug: slug}) }}" class="list-group-item list-group-item-action">
+            <div class="fw-bold">{{ course.name }}</div>
+            <small>{{ course.synopsis }}</small>
+        </a>
+    {% else %}
+        <div class="text-muted">Aucun cours similaire.</div>
+    {% endfor %}
+</div>

@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="h3 mb-4">Paiement de demonstration</h1>
+                    {{ form_start(form) }}
+                    <div class="row">
+                        <div class="col-md-12">{{ form_row(form.cardNumber) }}</div>
+                        <div class="col-md-4">{{ form_row(form.expirationMonth) }}</div>
+                        <div class="col-md-4">{{ form_row(form.expirationYear) }}</div>
+                        <div class="col-md-4">{{ form_row(form.cvv) }}</div>
+                    </div>
+                    {{ form_row(form.fullName) }}
+                    <button class="btn btn-primary" type="submit">Confirmer le paiement</button>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

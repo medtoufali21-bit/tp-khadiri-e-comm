@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ course.name }}{% endblock %}
+
+{% block content %}
+    {{ include('partials/_jumbotron.html.twig') }}
+
+    <div class="row g-4">
+        <div class="col-lg-8">
+            <div class="card">
+                <img class="course-detail-image rounded-top" src="{{ asset(course.imagePath) }}" alt="{{ course.name }}">
+                <div class="card-body">
+                    <span class="badge badge-soft mb-3">{{ course.category.name }}</span>
+                    <h2>{{ course.name }}</h2>
+                    <p class="text-muted">{{ course.category.name }} - par {{ course.author.name }}</p>
+                    <p><strong>Prix :</strong> {{ course.price|number_format(2, ',', ' ') }} DH</p>
+                    <p><strong>Synopsis :</strong> {{ course.synopsis }}</p>
+                    <hr>
+                    <p>{{ course.description }}</p>
+
+                    <div class="row g-3">
+                        <div class="col-md-7">
+                            {{ form_start(cartForm) }}
+                            {{ form_row(cartForm.quantity) }}
+                            {{ form_row(cartForm.format) }}
+                            <button class="btn btn-primary" type="submit">Ajouter au panier</button>
+                            {{ form_end(cartForm) }}
+                        </div>
+                        <div class="col-md-5">
+                            {{ form_start(wishlistForm) }}
+                            <button class="btn btn-outline-secondary mt-md-4" type="submit">Ajouter aux favoris</button>
+                            {{ form_end(wishlistForm) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <aside class="col-lg-4">
+            <h4>Cours similaires</h4>
+            {{ render(controller('App\\Controller\\CatalogController::similarCourses', {slug: slug})) }}
+        </aside>
+    </div>
+{% endblock %}

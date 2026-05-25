@@ -1,0 +1,17 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}{{ course.title }}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h1>{{ course.title }}</h1>
+            <p class="text-muted">Ajoute le {{ course.createdAt|date('d/m/Y H:i') }}</p>
+            <p>{{ course.summary ?: 'Aucun resume.' }}</p>
+            {% if course.filePath %}
+                <a href="{{ asset(course.filePath) }}" class="btn btn-primary">Telecharger le support</a>
+            {% endif %}
+            <a href="{{ path('app_course_all') }}" class="btn btn-outline-secondary">Retour</a>
+        </div>
+    </div>
+{% endblock %}

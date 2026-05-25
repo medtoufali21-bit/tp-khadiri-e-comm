@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="{{ path('app_home') }}">Ecomerce Khadiri</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_home') }}">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_catalog_all') }}">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_course_all') }}">Mediatheque</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_course') }}">Depot</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ path('app_cart') }}">Panier</a></li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if app.user %}
+                        <li class="nav-item"><span class="nav-link">{{ app.user.userIdentifier }}</span></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_logout') }}">Deconnexion</a></li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_login') }}">Connexion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{ path('app_register') }}">Inscription</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container py-4">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label == 'error' ? 'danger' : label }}">{{ message }}</div>
+            {% endfor %}
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="container py-5 border-top">
+        <div class="row">
+            <div class="col-md-4">
+                <h5>Ecomerce Khadiri</h5>
+                <p class="text-muted">Boutique de formations en ligne realisee avec Symfony et Docker.</p>
+            </div>
+            <div class="col-md-3">
+                <h5>Liens</h5>
+                <ul class="nav flex-column">
+                    <li class="nav-item"><a class="nav-link px-0" href="{{ path('app_catalog_all') }}">Catalogue</a></li>
+                    <li class="nav-item"><a class="nav-link px-0" href="{{ path('app_course_all') }}">Mediatheque</a></li>
+                    <li class="nav-item"><a class="nav-link px-0" href="{{ path('app_register') }}">Inscription</a></li>
+                </ul>
+            </div>
+            <div class="col-md-5">
+                {{ render(controller('App\\Controller\\SubscribeController::showForm')) }}
+            </div>
+        </div>
+    </footer>
+{% endblock %}
